@@ -421,13 +421,16 @@ func planValue(stream *tokenStream) (*evaluationStage, error) {
 		fallthrough
 	case PATTERN:
 		fallthrough
+	case IP:
+		fallthrough
+	case IPNet:
+		fallthrough
 	case BOOLEAN:
 		symbol = LITERAL
 		operator = makeLiteralStage(token.Value)
 	case TIME:
 		symbol = LITERAL
 		operator = makeLiteralStage(float64(token.Value.(time.Time).Unix()))
-
 	case PREFIX:
 		stream.rewind()
 		return planPrefix(stream)
@@ -535,7 +538,7 @@ func findTypeChecks(symbol OperatorSymbol) typeChecks {
 			left: isBool,
 		}
 
-	// unchecked cases
+		// unchecked cases
 	case EQ:
 		fallthrough
 	case NEQ:

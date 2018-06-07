@@ -162,12 +162,6 @@ func TestParsingFailure(test *testing.T) {
 		},
 		ParsingFailureTest{
 
-			Name:     "Multiple radix",
-			Input:    "127.0.0.1",
-			Expected: INVALID_NUMERIC,
-		},
-		ParsingFailureTest{
-
 			Name:     "Undefined function",
 			Input:    "foobar()",
 			Expected: UNDEFINED_FUNCTION,

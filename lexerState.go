@@ -16,7 +16,7 @@ type lexerState struct {
 // Constant for all purposes except compiler.
 var validLexerStates = []lexerState{
 
-	lexerState{
+	{
 		kind:       UNKNOWN,
 		isEOF:      false,
 		isNullable: true,
@@ -32,11 +32,11 @@ var validLexerStates = []lexerState{
 			STRING,
 			TIME,
 			CLAUSE,
+			IP,
 		},
 	},
 
-	lexerState{
-
+	{
 		kind:       CLAUSE,
 		isEOF:      false,
 		isNullable: true,
@@ -53,11 +53,11 @@ var validLexerStates = []lexerState{
 			TIME,
 			CLAUSE,
 			CLAUSE_CLOSE,
+			IP,
 		},
 	},
 
-	lexerState{
-
+	{
 		kind:       CLAUSE_CLOSE,
 		isEOF:      true,
 		isNullable: true,
@@ -79,8 +79,7 @@ var validLexerStates = []lexerState{
 		},
 	},
 
-	lexerState{
-
+	{
 		kind:       NUMERIC,
 		isEOF:      true,
 		isNullable: false,
@@ -94,8 +93,30 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
 
+	{
+		kind:       IP,
+		isEOF:      true,
+		isNullable: false,
+		validNextKinds: []TokenKind{
+
+			SEPARATOR,
+			COMPARATOR,
+			CLAUSE_CLOSE,
+			LOGICALOP,
+		},
+	},
+
+	{
+		kind:       IPNet,
+		isEOF:      true,
+		isNullable: false,
+		validNextKinds: []TokenKind{
+			CLAUSE_CLOSE,
+		},
+	},
+
+	{
 		kind:       BOOLEAN,
 		isEOF:      true,
 		isNullable: false,
@@ -109,8 +130,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       STRING,
 		isEOF:      true,
 		isNullable: false,
@@ -124,8 +144,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       TIME,
 		isEOF:      true,
 		isNullable: false,
@@ -138,8 +157,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       PATTERN,
 		isEOF:      true,
 		isNullable: false,
@@ -152,8 +170,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       VARIABLE,
 		isEOF:      true,
 		isNullable: false,
@@ -167,8 +184,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       MODIFIER,
 		isEOF:      false,
 		isNullable: false,
@@ -185,8 +201,7 @@ var validLexerStates = []lexerState{
 			CLAUSE_CLOSE,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       COMPARATOR,
 		isEOF:      false,
 		isNullable: false,
@@ -203,10 +218,10 @@ var validLexerStates = []lexerState{
 			CLAUSE,
 			CLAUSE_CLOSE,
 			PATTERN,
+			IP,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       LOGICALOP,
 		isEOF:      false,
 		isNullable: false,
@@ -224,8 +239,7 @@ var validLexerStates = []lexerState{
 			CLAUSE_CLOSE,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       PREFIX,
 		isEOF:      false,
 		isNullable: false,
@@ -241,8 +255,7 @@ var validLexerStates = []lexerState{
 		},
 	},
 
-	lexerState{
-
+	{
 		kind:       TERNARY,
 		isEOF:      false,
 		isNullable: false,
@@ -260,8 +273,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       FUNCTION,
 		isEOF:      false,
 		isNullable: false,
@@ -269,8 +281,7 @@ var validLexerStates = []lexerState{
 			CLAUSE,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       ACCESSOR,
 		isEOF:      true,
 		isNullable: false,
@@ -284,8 +295,7 @@ var validLexerStates = []lexerState{
 			SEPARATOR,
 		},
 	},
-	lexerState{
-
+	{
 		kind:       SEPARATOR,
 		isEOF:      false,
 		isNullable: true,
@@ -300,6 +310,8 @@ var validLexerStates = []lexerState{
 			FUNCTION,
 			ACCESSOR,
 			CLAUSE,
+			IP,
+			IPNet,
 		},
 	},
 }
