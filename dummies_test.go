@@ -83,6 +83,16 @@ var fooParameter = EvaluationParameter{
 	Value: dummyParameterInstance,
 }
 
+var fooParameterEmptyIP = EvaluationParameter{
+	Name: "foo",
+	Value: dummyParameter{
+		IP1:   nil,
+		IP2:   nil,
+		CIDR1: mustParseCIDR("127.0.0.4/22"),
+		CIDR2: mustParseCIDR("27.0.0.0/12"),
+	},
+}
+
 var fooPtrParameter = EvaluationParameter{
 	Name:  "fooptr",
 	Value: &dummyParameterInstance,

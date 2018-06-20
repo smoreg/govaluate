@@ -1314,7 +1314,6 @@ func TestParameterizedEvaluation(test *testing.T) {
 			Parameters: []EvaluationParameter{fooParameter},
 			Expected:   false,
 		},
-
 		{
 			Name:       "IP eq t",
 			Input:      "foo.IP1 == foo.IP1",
@@ -1362,6 +1361,37 @@ func TestParameterizedEvaluation(test *testing.T) {
 			Name:       "CIDR not in Network",
 			Input:      "InNetwork(foo.IP1, foo.CIDR2)",
 			Parameters: []EvaluationParameter{fooParameter},
+			Functions:  CIDRTestFunction,
+			Expected:   false,
+		},
+		{
+			Name:       "nil IP eq t",
+			Input:      "foo.IP1 == 127.0.0.1",
+			Parameters: []EvaluationParameter{fooParameterEmptyIP},
+			Expected:   false,
+		},
+		{
+			Name:       "nil IP not eq f",
+			Input:      "foo.IP1 != 127.0.0.1",
+			Parameters: []EvaluationParameter{fooParameterEmptyIP},
+			Expected:   false,
+		},
+		{
+			Name:       "nil IP gte f",
+			Input:      "foo.IP1 >= 127.0.0.1",
+			Parameters: []EvaluationParameter{fooParameterEmptyIP},
+			Expected:   false,
+		},
+		{
+			Name:       "nil IP in",
+			Input:      "foo.IP1 in ( 127.0.0.1, 127.0.0.2,  127.0.0.3)",
+			Parameters: []EvaluationParameter{fooParameterEmptyIP},
+			Expected:   true,
+		},
+		{
+			Name:       "nil CIDR in Network",
+			Input:      "InNetwork(foo.IP1, foo.CIDR1)",
+			Parameters: []EvaluationParameter{fooParameterEmptyIP},
 			Functions:  CIDRTestFunction,
 			Expected:   false,
 		},
